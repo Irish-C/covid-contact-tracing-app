@@ -1,0 +1,40 @@
+COVID-19 Contact Tracing Form
+
+PERSONAL INFORMATION
+First Name:
+Last Name:
+Phone Number:
+Email Address:
+Address:
+
+HEALTH INFORMATION
+▪ Have you experienced any symptoms associated with COVID-19 in the past 14 days? (Fever, cough, shortness of breath, loss of taste or smell, etc.) (yes/no)
+▪ If yes, please provide details of the symptoms experienced:
+Date of symptom onset:
+▪ Have you been tested for COVID-19? (Yes/No)
+▪ If yes, please provide the date of the test and the result:
+
+CONTACT INFORMATION
+Please provide the names and contact details (phone number or email address) of individuals you have been in close contact with in the past 14 days. Close contact is defined as being within 6 feet of a person who has tested positive for COVID-19 for a cumulative total of 15 minutes or more over a 24-hour period.
+
+Name:
+Phone Number:
+Email Address:
+
+Name:
+Phone Number:
+Email Address:
+
+Travel History:
+▪ Have you traveled outside of your local area in the past 14 days? (Yes/No)
+▪ If yes, please provide details of the locations and dates visited:
+Consent
+
+
+CONSENT
+□ I hereby give consent for the use of the above information for contact tracing purposes and confirm that all provided information is accurate to the best of my knowledge.
+
+
+"Please note that all information provided will be kept confidential and used solely for contact tracing efforts related to COVID-19.
+
+By submitting this form, you are acknowledging the importance of contact tracing in preventing the further spread of COVID-19 and understand that this form is not a substitute for other public health measures such as wearing masks and practicing social distancing."

@@ -31,11 +31,11 @@ class ContactForm:
             self.__address = address
 
         def set_health_information(self, symptoms, symptom_onset, tested_positive, test_date="", test_result=""):
-            self.symptoms = symptoms
-            self.symptom_onset = symptom_onset
-            self.tested_positive = tested_positive
-            self.test_date = test_date
-            self.test_result = test_result
+            self.__symptoms = symptoms
+            self.__symptom_onset = symptom_onset
+            self.__tested_positive = tested_positive
+            self.__test_date = test_date
+            self.__test_result = test_result
 
         def set_contact_information(self):
             pass

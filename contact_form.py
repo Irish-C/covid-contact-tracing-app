@@ -15,7 +15,26 @@ class ContactForm:
         self.test_date = ""
         self.test_result = ""
         # Contact information
-        self.close_contacts = []
-        self.travel_history = []
+        self.close_contacts = []    # List of close contacts in the last 14-days
+        self.travel_history = []    # List of places visited
         # Consent
         self.consent = False
+
+        """ Methods """
+        def set_personal_information(self):
+            pass
+
+        def set_health_information(self):
+            pass
+
+        def set_contact_information(self):
+            pass
+
+        def add_close_contact(self):
+            pass
+
+        def add_travel_history(self):
+            pass
+
+        def give_consent(self):
+            pass

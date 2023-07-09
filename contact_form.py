@@ -22,8 +22,13 @@ class ContactForm:
 
 
         """ Methods """
-        def set_personal_information(self):
-            pass
+        # A method that sets personal information of the respondent
+        def set_personal_information(self, first_name, last_name, phone_number, email_address, address):
+            self.__first_name = first_name
+            self.__last_name = last_name
+            self.__phone_number = phone_number
+            self.__email_address = email_address
+            self.__address = address
 
         def set_health_information(self):
             pass

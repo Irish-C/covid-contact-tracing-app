@@ -3,22 +3,23 @@ class ContactForm:
     # Constructor
     def __init__(self):
         # Personal information
-        self.first_name = ""
-        self.last_name = ""
-        self.phone_number = ""
-        self.email_address = ""
-        self.address = ""
+        self.__first_name = ""
+        self.__last_name = ""
+        self.__phone_number = ""
+        self.__email_address = ""
+        self.__address = ""
         # Health information
-        self.symptoms = ""
-        self.symptom_onset = ""
-        self.tested_positive = False
-        self.test_date = ""
-        self.test_result = ""
+        self.__symptoms = ""
+        self.__symptom_onset = ""
+        self.__tested_positive = False
+        self.__test_date = ""
+        self.__test_result = ""
         # Contact information
-        self.close_contacts = []    # List of close contacts in the last 14-days
-        self.travel_history = []    # List of places visited
+        self.__close_contacts = []    # List of close contacts in the last 14-days
+        self.__travel_history = []    # List of places visited
         # Consent
-        self.consent = False
+        self.__consent = False
+
 
         """ Methods """
         def set_personal_information(self):

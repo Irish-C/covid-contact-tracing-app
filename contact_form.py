@@ -30,6 +30,7 @@ class ContactForm:
             self.__email_address = email_address
             self.__address = address
 
+        # A method that sets health information of the respondent
         def set_health_information(self, symptoms, symptom_onset, tested_positive, test_date="", test_result=""):
             self.__symptoms = symptoms
             self.__symptom_onset = symptom_onset
@@ -37,14 +38,11 @@ class ContactForm:
             self.__test_date = test_date
             self.__test_result = test_result
 
-        def set_contact_information(self):
-            pass
+        def add_close_contact(self, name, contact_details):
+            self.close_contacts.append({'name': name, 'contact_details': contact_details})
 
-        def add_close_contact(self):
-            pass
-
-        def add_travel_history(self):
-            pass
+        def add_travel_history(self, location, date):
+            self.travel_history.append({'location': location, 'date': date})
 
         def give_consent(self):
-            pass
+            self.consent = True

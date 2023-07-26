@@ -22,8 +22,11 @@ class BackgroundUI:
         # Store the reference to the label to prevent the PhotoImage object from being garbage collected
         self.bg_label.image = self.bg_photo
 
-        # Add Descriptive Text and contents
+        # Use tkinter's canvas module 
         canvas = tk.Canvas(self.root)
+        canvas.pack(fill="both", expand=True)
+
+        # Create title and descriptive text/contents
         canvas.create_image(0, 0, image=self.bg_photo, anchor='nw')
         canvas.create_text(150,100, text="COVID-19", font=("Bold", 35, "bold italic"), fill="white")
         canvas.create_text(160,140, text="CONTACT", font=("Bold", 35, "bold"), fill="blue", activefill="red")
@@ -32,14 +35,25 @@ class BackgroundUI:
         canvas.create_text(270,220, text="This COVID-19 Contact Tracing App is a user-friendly and intuitive application\n"
                            "designed to help individuals track their potential exposure to COVID-19.", font=("Arial", 10), fill="light gray")
         
-        # Add functional texts
+        '''Create functional texts'''
+        # [Icons] Department and menu 
         canvas.create_text(160, 20, text="Department of QC DRRMO", font=("Arial", 10, "underline"), activefill="light gray")
-        canvas.create_text(850, 20, text="☰", font=("Arial", 15), activefill="light gray")
-        canvas.create_text(250, 300, text="Add Contact", font="Arial", activefill="white")
-        canvas.create_text(250, 370, text="Search Contact", font="Arial", activefill="white")
+        canvas.create_text(850, 20, text="☰", font=("Arial", 15), activefill="white")
+
+        # Add contact button
+        add_contact_box = canvas.create_rectangle(180, 280, 320, 320, fill="light blue", activefill="gray", outline='')
+        canvas.create_text(250, 300, text="ADD CONTACT", font=("Arial", 12, "bold"))
+        canvas.config(bg="light blue")
+
+        # Search contact button
+        search_contact_box = canvas.create_rectangle(165, 350, 335, 390, fill="light green", activefill="gray", outline='')
+        canvas.create_text(250, 370, text="SEARCH CONTACT", font=("Arial", 12, "bold"))
+        canvas.config(bg="light green")
+
+        # [Icons] Privacy policy, contact us, and exit
         canvas.create_text(150, 550, text="Privacy Policy", font=("Arial", 10), activefill="light gray")
         canvas.create_text(300, 550, text="Contact Us", font=("Arial", 10), activefill="light gray")
-        canvas.create_text(800, 550, text="Exit", font="Arial", fill="dark gray", activefill="red")
+        canvas.create_text(800, 550, text="Exit", font="Arial", fill="black", activefill="red")
         canvas.pack(fill="both", expand=True)
 
 

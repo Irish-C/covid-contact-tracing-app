@@ -43,12 +43,20 @@ class BackgroundUI:
         def on_button_hover(event):
             if event.type == '7':  # Enter event
                 event.widget.config(foreground="black", background="orange")
+                event.widget.master.config(background="orange")  # Update the frame's background
             elif event.type == '8':  # Leave event
-                event.widget.config(foreground="black", background=event.widget.original_bg_color)
-                
-        # Add contact button
-        add_contact_box = canvas.create_rectangle(180, 280, 320, 320, fill="light blue", activefill="gray", outline='')
-        canvas.create_text(250, 300, text="ADD CONTACT", font=("Arial", 12, "bold"))
+                event.widget.config(foreground="blue", background=event.widget.original_bg_color)
+                event.widget.master.config(background=event.widget.original_bg_color)  # Reset the frame's background
+
+        # Add contact button with background
+        add_contact_frame = tk.Frame(canvas, bg="white", padx=5, pady=5)
+        canvas.create_window(180, 300, window=add_contact_frame, anchor='nw')
+
+        add_contact_label = tk.Label(add_contact_frame, text="ADD CONTACT", font=("Arial", 12, "bold"))
+        add_contact_label.pack(fill="both", expand=True)
+        add_contact_label.original_bg_color = "light blue"  # Store the original background color
+        add_contact_label.bind("<Enter>", on_button_hover)
+        add_contact_label.bind("<Leave>", on_button_hover)
 
         # Search contact button
         search_contact_box = canvas.create_rectangle(165, 350, 335, 390, fill="light green", activefill="gray", outline='')

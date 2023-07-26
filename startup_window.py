@@ -40,15 +40,19 @@ class BackgroundUI:
         canvas.create_text(160, 20, text="Department of QC DRRMO", font=("Arial", 10, "underline"), activefill="light gray")
         canvas.create_text(850, 20, text="☰", font=("Arial", 15), activefill="white")
 
+        def on_button_hover(event):
+            if event.type == '7':  # Enter event
+                event.widget.config(foreground="black", background="orange")
+            elif event.type == '8':  # Leave event
+                event.widget.config(foreground="black", background=event.widget.original_bg_color)
+                
         # Add contact button
         add_contact_box = canvas.create_rectangle(180, 280, 320, 320, fill="light blue", activefill="gray", outline='')
         canvas.create_text(250, 300, text="ADD CONTACT", font=("Arial", 12, "bold"))
-        canvas.config(bg="light blue")
 
         # Search contact button
         search_contact_box = canvas.create_rectangle(165, 350, 335, 390, fill="light green", activefill="gray", outline='')
         canvas.create_text(250, 370, text="SEARCH CONTACT", font=("Arial", 12, "bold"))
-        canvas.config(bg="light green")
 
         # [Icons] Privacy policy, contact us, and exit
         canvas.create_text(150, 550, text="Privacy Policy", font=("Arial", 10), activefill="light gray")

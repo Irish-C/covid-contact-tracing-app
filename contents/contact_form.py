@@ -12,10 +12,28 @@ class ContactForm:
         self.add_contact_window.geometry("900x620+{}+{}".format(int(self.add_contact_window.winfo_screenwidth() / 2 - 450), 0))
 
         self.image = PhotoImage(file="image_widgets/app_bg.png")    # Load the image using PhotoImage
+        
+                            # # Create a label with the loaded image as the background
+                            # self.background_label = tk.Label(self.add_contact_window, image=self.image)
+                            # self.background_label.pack(fill=tk.BOTH, expand=tk.YES)
 
-        # Create a label with the loaded image as the background
-        self.background_label = tk.Label(self.add_contact_window, image=self.image)
-        self.background_label.pack(fill=tk.BOTH, expand=tk.YES)
+        # Create a canvas inside the add_contact_window
+        self.canvas = tk.Canvas(self.add_contact_window, bd=0)
+        self.canvas.pack(fill="both", expand=True)
+
+        # Personal Information inside the canvas
+        self.personal_info_frame = tk.Frame(self.canvas, bg="")
+        self.personal_info_frame.pack()
+
+        # Load and display the background image on the canvas
+        self.canvas.image = self.image  # Keep a reference to the image
+        self.canvas.create_image(0, 0, anchor='nw', image=self.image)
+        
+        # Create labels and entry fields for personal information
+        self.label_first_name = tk.Label(self.personal_info_frame, text="First Name:")
+        self.label_first_name.grid(row=0, column=0)
+        self.entry_first_name = tk.Entry(self.personal_info_frame)
+        self.entry_first_name.grid(row=0, column=1)
 
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):

@@ -22,17 +22,26 @@ class BackgroundUI:
         # Store the reference to the label to prevent the PhotoImage object from being garbage collected
         self.bg_label.image = self.bg_photo
 
-        # Add Texts
+        # Add Descriptive Text and contents
         canvas = tk.Canvas(self.root)
         canvas.create_image(0, 0, image=self.bg_photo, anchor='nw')
-        canvas.create_text(150, 20, text="Department of QC DRRMO", font=("Arial", 10))
         canvas.create_text(150,100, text="COVID-19", font=("Bold", 35, "bold italic"), fill="white")
-        canvas.create_text(160,135, text="CONTACT", font=("Bold", 35, "bold"), fill="blue")
-        canvas.create_text(353,135, text="TRACING", font=("Bold", 35, "bold"), fill="red")
-        canvas.create_text(105,180, text="QUEZON CITY", font=("Arial", 12, "bold italic"), fill="gray")
-        canvas.create_text(265,210, text="This COVID-19 Contact Tracing App is a user-friendly and intuitive application", font=("Arial", 10), fill="gray")
-        canvas.create_text(255,225, text="designed to help individuals track their potential exposure to COVID-19.", font=("Arial", 10), fill="gray")
+        canvas.create_text(160,140, text="CONTACT", font=("Bold", 35, "bold"), fill="blue", activefill="red")
+        canvas.create_text(353,140, text="TRACING", font=("Bold", 35, "bold"), fill="red", activefill="blue")
+        canvas.create_text(105,180, text="QUEZON CITY", font=("Arial", 12, "bold italic"), fill="light gray", activefill="orange")
+        canvas.create_text(270,220, text="This COVID-19 Contact Tracing App is a user-friendly and intuitive application\n"
+                           "designed to help individuals track their potential exposure to COVID-19.", font=("Arial", 10), fill="light gray")
+        
+        # Add functional texts
+        canvas.create_text(160, 20, text="Department of QC DRRMO", font=("Arial", 10, "underline"), activefill="light gray")
+        canvas.create_text(850, 20, text="☰", font=("Arial", 15), activefill="light gray")
+        canvas.create_text(250, 300, text="Add Contact", font="Arial", activefill="white")
+        canvas.create_text(250, 370, text="Search Contact", font="Arial", activefill="white")
+        canvas.create_text(150, 550, text="Privacy Policy", font=("Arial", 10), activefill="light gray")
+        canvas.create_text(300, 550, text="Contact Us", font=("Arial", 10), activefill="light gray")
+        canvas.create_text(800, 550, text="Exit", font="Arial", fill="dark gray", activefill="red")
         canvas.pack(fill="both", expand=True)
+
 
     def update_image_size(self, event):
         '''Update image size when window is resized'''

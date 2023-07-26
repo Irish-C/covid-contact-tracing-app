@@ -58,9 +58,15 @@ class BackgroundUI:
         add_contact_label.bind("<Enter>", on_button_hover)
         add_contact_label.bind("<Leave>", on_button_hover)
 
-        # Search contact button
-        search_contact_box = canvas.create_rectangle(165, 350, 335, 390, fill="light green", activefill="gray", outline='')
-        canvas.create_text(250, 370, text="SEARCH CONTACT", font=("Arial", 12, "bold"))
+        # Search contact button with background
+        search_contact_frame = tk.Frame(canvas, bg="white", padx=5, pady=5)
+        canvas.create_window(170, 370, window=search_contact_frame, anchor='nw')
+
+        search_contact_label = tk.Label(search_contact_frame, text="SEARCH CONTACT", font=("Arial", 12, "bold"))
+        search_contact_label.pack(fill="both", expand=True)
+        search_contact_label.original_bg_color = "light blue"  # Store the original background color
+        search_contact_label.bind("<Enter>", on_button_hover)
+        search_contact_label.bind("<Leave>", on_button_hover)
 
         # [Icons] Privacy policy, contact us, and exit
         canvas.create_text(150, 550, text="Privacy Policy", font=("Arial", 10), activefill="light gray")

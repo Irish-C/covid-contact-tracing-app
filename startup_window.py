@@ -60,7 +60,7 @@ class BackgroundUI:
 
         # Search contact button with background
         search_contact_frame = tk.Frame(canvas, bg="white", padx=5, pady=5)
-        canvas.create_window(170, 370, window=search_contact_frame, anchor='nw')
+        canvas.create_window(165, 370, window=search_contact_frame, anchor='nw')
 
         search_contact_label = tk.Label(search_contact_frame, text="SEARCH CONTACT", font=("Arial", 12, "bold"))
         search_contact_label.pack(fill="both", expand=True)
@@ -71,9 +71,11 @@ class BackgroundUI:
         # [Icons] Privacy policy, contact us, and exit
         canvas.create_text(150, 550, text="Privacy Policy", font=("Arial", 10), activefill="light gray")
         canvas.create_text(300, 550, text="Contact Us", font=("Arial", 10), activefill="light gray")
-        canvas.create_text(800, 550, text="Exit", font="Arial", fill="black", activefill="red")
-        canvas.pack(fill="both", expand=True)
-
+        exit_text = canvas.create_text(800, 550, text="Exit", font="Arial", fill="black", activefill="red")
+        canvas.tag_bind(exit_text, "<Button-1>", self.exit_click)
+    
+    def exit_click(self, event):    # Exit main window
+        self.root.destroy()
 
     def update_image_size(self, event):
         '''Update image size when window is resized'''

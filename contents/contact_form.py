@@ -1,12 +1,21 @@
 import tkinter as tk
+from tkinter import PhotoImage
+
 import re
 
-class ContactFormUI:
-    """ 
-    Contact Tracing Form class
-    """
-    def __init__(self, add_window):
-        pass
+
+class ContactForm:
+    '''Contact Tracing Form'''
+    def __init__(self, add_contact_window):
+        self.add_contact_window = add_contact_window
+        self.add_contact_window.title("ContacTracing Form")
+        self.add_contact_window.geometry("900x620+{}+{}".format(int(self.add_contact_window.winfo_screenwidth() / 2 - 450), 0))
+
+        self.image = PhotoImage(file="image_widgets/app_bg.png")    # Load the image using PhotoImage
+
+        # Create a label with the loaded image as the background
+        self.background_label = tk.Label(self.add_contact_window, image=self.image)
+        self.background_label.pack(fill=tk.BOTH, expand=tk.YES)
 
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):
@@ -17,27 +26,16 @@ class ContactFormUI:
     #     # Format and set the full name
     #     self.__fullname = '{} {}'.format(first_name.capitalize(), last_name.capitalize())
 
-    #     # Remove non-digit characters from phone number and validate its length
-    #     phone_number = re.sub(r'\D', '', phone_number)
-    #     if len(phone_number) != 11:
-    #         raise ValueError("Phone number must have 11 digits.")
-    #     self.__phone_number = phone_number
+        # Validate email address format
+        # if not re.match(r"[^@]+@[^@]+\.[^@]+", email_address):
+        #     raise ValueError("Invalid email address.")
+        # self.__email_address = email_address
 
-    #     # Validate email address format
-    #     if not re.match(r"[^@]+@[^@]+\.[^@]+", email_address):
-    #         raise ValueError("Invalid email address.")
-    #     self.__email_address = email_address
+        # # Set the address
+        # self.__address = address
 
     #     # Set the address
     #     self.__address = address
-
-    # # HEALTH INFORMATION
-    # def set_health_information(self, symptoms, symptom_onset, tested_positive, test_date="", test_result=""):
-    #     self.__symptoms = symptoms
-    #     self.__symptom_onset = symptom_onset
-    #     self.__tested_positive = tested_positive
-    #     self.__test_date = test_date
-    #     self.__test_result = test_result
 
     # # A method that add close contact into lists
     # def add_close_contact(self, name, contact_details):
@@ -52,6 +50,6 @@ class ContactFormUI:
     #     self.consent = True
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = ContactFormUI(root)
-    root.mainloop()
+    add_contact_window= tk.Tk()
+    app = ContactForm(add_contact_window)
+    add_contact_window.mainloop()

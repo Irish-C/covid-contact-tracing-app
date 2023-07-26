@@ -1,0 +1,5 @@
+# Ignore __pycache__ directory in the root folder
+__pycache__/
+
+# Ignore __pycache__ directories inside other folders
+**/__pycache__/

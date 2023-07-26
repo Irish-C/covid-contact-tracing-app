@@ -1,16 +1,12 @@
 import tkinter as tk
-from bg_UI import BackgroundUI
 import re
 
-class ContactForm(BackgroundUI):
+class ContactForm:
     """ 
     Contact Tracing Form class
     """
-    def __init__(self, root):
-        # Call the constructor of the parent class (ContactFormUI)
-        super().__init__(root)
-        self.root.title("Contact Tracing Form")
-
+    def __init__(self):
+        pass
     # PERSONAL INFORMATION
     def set_personal_information(self, first_name, last_name, phone_number, email_address, address):
         '''

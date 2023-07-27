@@ -1,9 +1,7 @@
 import tkinter as tk
-from tkinter import ttk
-from tkinter import PhotoImage
+from tkinter import ttk, PhotoImage
 
 import re
-
 
 class ContactForm:
     '''Contact Tracing Form'''
@@ -14,6 +12,11 @@ class ContactForm:
 
         self.image = PhotoImage(file="image_widgets/ui_bg.png")    # Load the image using PhotoImage
         
+        # Call personal info and health info methods
+        self.personal_info()
+        self.health_info()
+
+    def personal_info(self):
         # Create a canvas inside the add_contact_window
         self.canvas = tk.Canvas(self.add_contact_window, bd=0)
         self.canvas.pack(fill="both", expand=True)
@@ -24,8 +27,8 @@ class ContactForm:
         
         '''Ask user of their personal information'''
         # Personal Information inside the canvas
-        self.personal_info_frame = tk.Frame(self.canvas)
-        self.personal_info_frame.place(x=100, y=50, width=700, height=200)
+        self.personal_info_frame = tk.Frame(self.canvas, borderwidth=10, highlightthickness=1, highlightbackground="gray")
+        self.personal_info_frame.place(x=100, y=50, width=700, height=210)
 
         # Label for Personal Information
         self.label_personal_info = tk.Label(self.personal_info_frame, text="\nPERSONAL INFORMATION\n", 
@@ -36,24 +39,29 @@ class ContactForm:
         self.name_label = tk.Label(self.personal_info_frame, text="Name:", font=("Arial", 10))
         self.name_label.grid(row=1, column=0)
 
-        self.entry_first_name = tk.Entry(self.personal_info_frame, justify="center")
-        self.entry_first_name.grid(row=1, column=1)
-        self.entry_last_name = tk.Entry(self.personal_info_frame, justify="center")
-        self.entry_last_name.grid(row=1, column=2)
-        self.entry_middle_initial = tk.Entry(self.personal_info_frame, justify="center",)
-        self.entry_middle_initial.grid(row=1, column=3)
-        self.entry_name_suffix = ttk.Combobox(self.personal_info_frame, values=["", "Sr.", "Jr.", "III", "IV"])
-        self.entry_name_suffix.grid(row=1, column=4)
-
-        # Name Label in each Entry
+        # First Name Label and Entry
         self.label_first_name = tk.Label(self.personal_info_frame, text="First Name", font=("Arial", 9, "italic"))
         self.label_first_name.grid(row=2, column=1)
+        self.entry_first_name = tk.Entry(self.personal_info_frame, justify="center")
+        self.entry_first_name.grid(row=1, column=1)
+
+        # Last Name Label and Entry
         self.label_last_name = tk.Label(self.personal_info_frame, text="Last Name", font=("Arial", 9, "italic"))
         self.label_last_name.grid(row=2, column=2)
+        self.entry_last_name = tk.Entry(self.personal_info_frame, justify="center")
+        self.entry_last_name.grid(row=1, column=2)
+
+        # Middle Initial Label and Entry
         self.label_middle_initial = tk.Label(self.personal_info_frame, text="M.I. (optional)", font=("Arial", 9, "italic"))
         self.label_middle_initial.grid(row=2, column=3)
+        self.entry_middle_initial = tk.Entry(self.personal_info_frame, justify="center",)
+        self.entry_middle_initial.grid(row=1, column=3)
+
+        # Name Suffix Label and Entry
         self.label_name_suffix = tk.Label(self.personal_info_frame, text="Suffix", font=("Arial", 9, "italic"))
         self.label_name_suffix.grid(row=2, column=4)
+        self.entry_name_suffix = ttk.Combobox(self.personal_info_frame, values=["", "Sr.", "Jr.", "III", "IV"])
+        self.entry_name_suffix.grid(row=1, column=4)
 
         # Phone number, email, and address fields
         self.phone_label = ttk.Label(self.personal_info_frame, text="\tPhone Number:", font=("Arial", 10))
@@ -70,6 +78,45 @@ class ContactForm:
         self.address_label.grid(row=8, column=0)
         self.address_entry = ttk.Entry(self.personal_info_frame, justify="center")
         self.address_entry.grid(row=8, column=1, columnspan=3, sticky=tk.W+tk.E)
+
+    def health_info(self):
+        # Health Information Frame
+        self.health_frame = ttk.LabelFrame(self.add_contact_window, text="\nHEALTH INFORMATION\n", labelanchor="n")
+        self. health_frame.place(x=100, y=250, width=700, height=320)
+
+        self.label_health_info = tk.Label(self.personal_info_frame, text="\nHEALTH INFORMATION\n", 
+                                            font=("Arial", 14, "bold"),justify="center")
+        self.label_health_info.grid(row=0, column=0, columnspan=7)
+
+        # Vaccination status
+        self.vaccination_label = ttk.Label(self.health_frame, 
+                                           text="\t(A.) Have you been vaccinated?")
+        self.vaccination_label.grid(row=0, column=0, sticky="w")
+        self.vaccination_choice = ttk.Combobox(self.health_frame, 
+                                               values=["1st shot", "2nd shot", "Not yet", "1st Booster", "2nd Booster"])
+        self.vaccination_choice.grid(row=0, column=1)
+
+        # COVID symptoms
+        self.symptoms_label = ttk.Label(self.health_frame, 
+                                        text="\t(B.) Have you experienced symptoms of COVID within 14 days?")
+        self.symptoms_label.grid(row=4, column=0, sticky="w")
+        self.symptoms_choice = ttk.Combobox(self.health_frame, values=["YES", "NO"])
+        self.symptoms_choice.grid(row=4, column=1)
+        self.symptoms_label = ttk.Label(self.health_frame, text="\t\t\t\tIf YES, check all that applies:", 
+                                        font=("Arial", 8, "italic"))
+        self.symptoms_label.grid(row=5, column=0, sticky="w")
+
+        # COVID symptoms checkboxes
+        symptoms_checkboxes = [
+            ("Fever", tk.IntVar()),
+            ("Cough", tk.IntVar()),
+            ("Shortness of breath", tk.IntVar()),
+            ("Fatigue", tk.IntVar()),
+        ]
+
+        for i, (symptom, var) in enumerate(symptoms_checkboxes):
+            checkbox = ttk.Checkbutton(self.health_frame, text=symptom, variable=var)
+            checkbox.grid(row=i+5, column=1, sticky="w")
 
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):

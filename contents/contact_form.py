@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, PhotoImage
 
-import tkcalendar
-import re
+import tkcalendar, re
 
 class ContactForm:
     '''Contact Tracing Form'''
@@ -11,7 +10,7 @@ class ContactForm:
         self.add_contact_window.title("ContacTracing Form")
         self.add_contact_window.geometry("900x620+{}+{}".format(int(self.add_contact_window.winfo_screenwidth() / 2 - 450), 0))
 
-        self.image = PhotoImage(file="image_widgets/ui_bg.png")    # Load the image using PhotoImage
+        self.image = PhotoImage(file="image_widgets/ui.png")    # Load the image using PhotoImage
         
         # Call personal info and health info methods
         self.personal_info()
@@ -25,7 +24,11 @@ class ContactForm:
         # Load and display the background image on the canvas
         self.canvas.image = self.image  # Keep a reference to the image
         self.canvas.create_image(0, 0, anchor='nw', image=self.image)
-        
+
+        # Heading
+        self.canvas.create_text(320,25, text="CONTACTRACINGFORM", font=("Arial", 25, "bold"), fill="blue")
+        self.canvas.create_text(341,25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
+
         '''Ask user of their personal information'''
         # Personal Information inside the canvas
         self.personal_info_frame = tk.Frame(self.canvas, borderwidth=10, highlightthickness=1, highlightbackground="gray")
@@ -160,12 +163,31 @@ class ContactForm:
                 self.date_entry.configure(state="normal")
                 self.result_label.configure(state="normal")
                 self.result_choice.configure(state="normal")
+
             else:
                 self.date_label.configure(state="disabled")
                 self.date_entry.configure(state="disabled")
                 self.result_label.configure(state="disabled")
                 self.result_choice.configure(state="disabled")
                 
+        # COVID testing
+        self.testing_label = ttk.Label(self.health_frame, text="\t(C.) Have you been tested for COVID-19?")
+        self.testing_label.grid(row=len(symptoms_checkboxes)+7, column=0, sticky="w")
+        self.testing_choice = ttk.Combobox(self.health_frame, values=["Yes", "No"])
+        self.testing_choice.grid(row=len(symptoms_checkboxes)+7, column=1)
+
+        # Testing date and result
+        self.date_label = ttk.Label(self.health_frame, text="\t(D.) Date of testing (MM/DD/YYYY):", state="disabled")
+        self.date_label.grid(row=len(symptoms_checkboxes)+8, column=0, sticky="w")
+        self.date_entry = tkcalendar.DateEntry(self.health_frame, date_pattern="mm/dd/yyyy", state="disabled")
+        self.date_entry.grid(row=len(symptoms_checkboxes) + 8, column=1)
+        self.result_label = ttk.Label(self.health_frame, text="\t(E.) Result of the test:", state="disabled")
+        self.result_label.grid(row=len(symptoms_checkboxes)+9, column=0, sticky="w")
+        self.result_choice = ttk.Combobox(self.health_frame, values=["Positive", "Negative", "Pending"], state="disabled")
+        self.result_choice.grid(row=len(symptoms_checkboxes)+9, column=1)
+
+        # Bind the enable_disable_date_result_fields function to the testing_choice combobox event
+        self.testing_choice.bind("<<ComboboxSelected>>", enable_disable_date_result_fields)      
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):
     #     '''

@@ -25,14 +25,15 @@ class ContactForm:
         '''Ask user of their personal information'''
         # Personal Information inside the canvas
         self.personal_info_frame = tk.Frame(self.canvas)
-        self.personal_info_frame.pack(padx=100, pady=50)
+        self.personal_info_frame.place(x=100, y=50, width=700, height=200)
 
         # Label for Personal Information
-        self.label_personal_info = tk.Label(self.personal_info_frame, text="\nPERSONAL INFORMATION\n", font=("Arial", 11),justify="center")
-        self.label_personal_info.grid(row=0, column=0, columnspan=5)
+        self.label_personal_info = tk.Label(self.personal_info_frame, text="\nPERSONAL INFORMATION\n", 
+                                            font=("Arial", 14, "bold"),justify="center")
+        self.label_personal_info.grid(row=0, column=0, columnspan=7)
 
         # Create labels and entry fields for personal information
-        self.name_label = tk.Label(self.personal_info_frame, text="Name:", font=("Arial", 11))
+        self.name_label = tk.Label(self.personal_info_frame, text="Name:", font=("Arial", 10))
         self.name_label.grid(row=1, column=0)
 
         self.entry_first_name = tk.Entry(self.personal_info_frame, justify="center")
@@ -44,14 +45,31 @@ class ContactForm:
         self.entry_name_suffix = ttk.Combobox(self.personal_info_frame, values=["", "Sr.", "Jr.", "III", "IV"])
         self.entry_name_suffix.grid(row=1, column=4)
 
+        # Name Label in each Entry
         self.label_first_name = tk.Label(self.personal_info_frame, text="First Name", font=("Arial", 9, "italic"))
         self.label_first_name.grid(row=2, column=1)
         self.label_last_name = tk.Label(self.personal_info_frame, text="Last Name", font=("Arial", 9, "italic"))
         self.label_last_name.grid(row=2, column=2)
-        self.label_middle_initial = tk.Label(self.personal_info_frame, text="M.I.", font=("Arial", 9, "italic"))
+        self.label_middle_initial = tk.Label(self.personal_info_frame, text="M.I. (optional)", font=("Arial", 9, "italic"))
         self.label_middle_initial.grid(row=2, column=3)
         self.label_name_suffix = tk.Label(self.personal_info_frame, text="Suffix", font=("Arial", 9, "italic"))
         self.label_name_suffix.grid(row=2, column=4)
+
+        # Phone number, email, and address fields
+        self.phone_label = ttk.Label(self.personal_info_frame, text="\tPhone Number:", font=("Arial", 10))
+        self.phone_label.grid(row=6, column=0)
+        self.phone_entry = ttk.Entry(self.personal_info_frame, justify="center")
+        self.phone_entry.grid(row=6, column=1)
+
+        self.email_label = ttk.Label(self.personal_info_frame, text="\tEmail:", font=("Arial", 10))
+        self.email_label.grid(row=7, column=0)
+        self.email_entry = ttk.Entry(self.personal_info_frame, justify="center")
+        self.email_entry.grid(row=7, column=1)
+
+        self.address_label = ttk.Label(self.personal_info_frame, text="\tAddress:", font=("Arial", 10))
+        self.address_label.grid(row=8, column=0)
+        self.address_entry = ttk.Entry(self.personal_info_frame, justify="center")
+        self.address_entry.grid(row=8, column=1, columnspan=3, sticky=tk.W+tk.E)
 
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):

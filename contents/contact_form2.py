@@ -18,3 +18,17 @@ class ContactForm:
         # Load and display the background image on the canvas
         self.canvas.image = self.image  # Keep a reference to the image
         self.canvas.create_image(0, 0, anchor='nw', image=self.image)
+
+        # Heading
+        self.canvas.create_text(320,25, text="CONTACTRACINGFORM", font=("Arial", 25, "bold"), fill="blue")
+        self.canvas.create_text(341,25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
+        # Call personal info and health info methods
+
+        self.emergency_info()
+        self.travel_history()
+
+    def emergency_info(self):
+        pass
+
+    def travel_history(self):
+        pass

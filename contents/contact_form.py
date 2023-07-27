@@ -32,7 +32,7 @@ class ContactForm:
 
         # Label for Personal Information
         self.label_personal_info = tk.Label(self.personal_info_frame, text="\nPERSONAL INFORMATION\n", 
-                                            font=("Arial", 14, "bold"), foreground="dark blue", justify="center")
+                                            font=("Arial", 14, "bold underline"), foreground="dark blue")
         self.label_personal_info.grid(row=0, column=0, columnspan=2)
 
         # Create labels and entry fields for personal information
@@ -84,9 +84,9 @@ class ContactForm:
         self.health_frame = tk.Frame(self.add_contact_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
         self.health_frame.place(x=100, y=270, width=700, height=320)
 
-        self.label_health_info = tk.Label(self.health_frame, text="\nHEALTH INFORMATION", 
-                                            font=("Arial", 14, "bold"), foreground="dark blue", justify="center")
-        self.label_health_info.grid(row=0, column=0)
+        self.label_health_info = tk.Label(self.health_frame, text="HEALTH INFORMATION", 
+                                            font=("Arial", 14, "bold underline"), foreground="dark blue")
+        self.label_health_info.grid(row=0, column=0, columnspan=5, padx=20, pady=5, sticky="w")
 
         # Vaccination status
         self.vaccination_label = ttk.Label(self.health_frame, 
@@ -104,7 +104,7 @@ class ContactForm:
         self.symptoms_choice.grid(row=5, column=1)
         self.symptoms_label = ttk.Label(self.health_frame, text="\t\t\t\tIf YES, check all that applies:", 
                                         font=("Arial", 8, "italic"))
-        self.symptoms_label.grid(row=6, column=0, sticky="w")
+        self.symptoms_label.grid(row=6, column=0, columnspan=2, sticky="w")
 
         # COVID symptoms checkboxes
         symptoms_checkboxes = [
@@ -112,28 +112,43 @@ class ContactForm:
             ("Cough", tk.IntVar()),
             ("Shortness of breath", tk.IntVar()),
             ("Fatigue", tk.IntVar()),
+            ("Other:", tk.IntVar())  # Additional checkbox for "Other" option
         ]
 
         for i, (symptom, var) in enumerate(symptoms_checkboxes):
             checkbox = ttk.Checkbutton(self.health_frame, text=symptom, variable=var)
             checkbox.grid(row=i+6, column=1, sticky="w")
 
+        # Entry field for inputting other symptoms
+        self.other_symptoms_entry = ttk.Entry(self.health_frame, state="disabled", justify="center")
+        self.other_symptoms_entry.grid(row=len(symptoms_checkboxes)+6, column=1, sticky="w")
+
+        # Function to enable/disable the entry field based on the "Other" checkbox state
+        def enable_disable_other_symptoms_entry(*args):
+            if symptoms_checkboxes[-1][1].get() == 1:  # If "Other" checkbox is checked
+                self.other_symptoms_entry["state"] = "normal"
+            else:
+                self.other_symptoms_entry["state"] = "disabled"
+
+        # Binding the enable_disable_other_symptoms_entry function to the "Other" checkbox
+        symptoms_checkboxes[-1][1].trace("w", enable_disable_other_symptoms_entry)
+
         # COVID testing
         self.testing_label = ttk.Label(self.health_frame, text="\t(C.) Have you been tested for COVID-19?")
-        self.testing_label.grid(row=len(symptoms_checkboxes)+5, column=0, sticky="w")
+        self.testing_label.grid(row=len(symptoms_checkboxes)+7, column=0, sticky="w")
         self.testing_choice = ttk.Combobox(self.health_frame, values=["Yes", "No"])
-        self.testing_choice.grid(row=len(symptoms_checkboxes)+5, column=1)
+        self.testing_choice.grid(row=len(symptoms_checkboxes)+7, column=1)
 
         # Testing date and result
         self.date_label = ttk.Label(self.health_frame, text="\t(D.) Date of testing (MM/DD/YYYY):")
-        self.date_label.grid(row=len(symptoms_checkboxes)+7, column=0, sticky="w")
+        self.date_label.grid(row=len(symptoms_checkboxes)+8, column=0, sticky="w")
         self.date_entry = ttk.Entry(self.health_frame)
-        self.date_entry.grid(row=len(symptoms_checkboxes)+7, column=1)
+        self.date_entry.grid(row=len(symptoms_checkboxes)+8, column=1)
 
         self.result_label = ttk.Label(self.health_frame, text="\t(E.) Result of the test:")
-        self.result_label.grid(row=len(symptoms_checkboxes)+8, column=0, sticky="w")
+        self.result_label.grid(row=len(symptoms_checkboxes)+9, column=0, sticky="w")
         self.result_choice = ttk.Combobox(self.health_frame, values=["Positive", "Negative", "Pending"])
-        self.result_choice.grid(row=len(symptoms_checkboxes)+8, column=1)
+        self.result_choice.grid(row=len(symptoms_checkboxes)+9, column=1)
 
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):

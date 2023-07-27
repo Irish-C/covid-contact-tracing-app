@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, PhotoImage
 
+import tkcalendar
 import re
 
 class ContactForm:
@@ -42,19 +43,19 @@ class ContactForm:
         # First Name Label and Entry
         self.label_first_name = tk.Label(self.personal_info_frame, text="First Name", font=("Arial", 9, "italic"))
         self.label_first_name.grid(row=2, column=1)
-        self.entry_first_name = tk.Entry(self.personal_info_frame, justify="center")
+        self.entry_first_name = ttk.Entry(self.personal_info_frame, justify="center")
         self.entry_first_name.grid(row=1, column=1)
 
         # Last Name Label and Entry
         self.label_last_name = tk.Label(self.personal_info_frame, text="Last Name", font=("Arial", 9, "italic"))
         self.label_last_name.grid(row=2, column=2)
-        self.entry_last_name = tk.Entry(self.personal_info_frame, justify="center")
+        self.entry_last_name = ttk.Entry(self.personal_info_frame, justify="center")
         self.entry_last_name.grid(row=1, column=2)
 
         # Middle Initial Label and Entry
         self.label_middle_initial = tk.Label(self.personal_info_frame, text="M.I. (optional)", font=("Arial", 9, "italic"))
         self.label_middle_initial.grid(row=2, column=3)
-        self.entry_middle_initial = tk.Entry(self.personal_info_frame, justify="center",)
+        self.entry_middle_initial = ttk.Entry(self.personal_info_frame, justify="center",)
         self.entry_middle_initial.grid(row=1, column=3)
 
         # Name Suffix Label and Entry
@@ -100,7 +101,7 @@ class ContactForm:
         self.symptoms_label = ttk.Label(self.health_frame, 
                                         text="\t(B.) Have you experienced symptoms of COVID within 14 days?")
         self.symptoms_label.grid(row=5, column=0, sticky="w")
-        self.symptoms_choice = ttk.Combobox(self.health_frame, values=["YES", "NO"])
+        self.symptoms_choice = ttk.Combobox(self.health_frame, values=["Yes", "No"])
         self.symptoms_choice.grid(row=5, column=1)
         self.symptoms_label = ttk.Label(self.health_frame, text="\t\t\t\tIf YES, check all that applies:", 
                                         font=("Arial", 8, "italic"))
@@ -142,14 +143,29 @@ class ContactForm:
         # Testing date and result
         self.date_label = ttk.Label(self.health_frame, text="\t(D.) Date of testing (MM/DD/YYYY):")
         self.date_label.grid(row=len(symptoms_checkboxes)+8, column=0, sticky="w")
-        self.date_entry = ttk.Entry(self.health_frame)
-        self.date_entry.grid(row=len(symptoms_checkboxes)+8, column=1)
+
+        # Import calendar
+        self.date_entry = tkcalendar.DateEntry(self.health_frame, date_pattern="mm/dd/yyyy")
+        self.date_entry.grid(row=len(symptoms_checkboxes) + 8, column=1)
 
         self.result_label = ttk.Label(self.health_frame, text="\t(E.) Result of the test:")
         self.result_label.grid(row=len(symptoms_checkboxes)+9, column=0, sticky="w")
         self.result_choice = ttk.Combobox(self.health_frame, values=["Positive", "Negative", "Pending"])
         self.result_choice.grid(row=len(symptoms_checkboxes)+9, column=1)
 
+        # Define a function to enable or disable the date and result fields based on the testing choice
+        def enable_disable_date_result_fields(event):
+            if self.testing_choice.get() == "Yes":
+                self.date_label.configure(state="normal")
+                self.date_entry.configure(state="normal")
+                self.result_label.configure(state="normal")
+                self.result_choice.configure(state="normal")
+            else:
+                self.date_label.configure(state="disabled")
+                self.date_entry.configure(state="disabled")
+                self.result_label.configure(state="disabled")
+                self.result_choice.configure(state="disabled")
+                
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):
     #     '''

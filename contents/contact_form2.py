@@ -62,7 +62,32 @@ class ContactForm:
         self.entry_name_suffix.grid(row=4, column=1)
 
     def travel_history(self):
-        pass
+        # Travel History Frame
+        self.travel_frame = tk.Frame(self.add_contact_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
+        self.travel_frame.place(x=100, y=260, width=700, height=300)
+
+        # Label for Travel History
+        self.label_travel_history = tk.Label(self.travel_frame, text="TRAVEL HISTORY", 
+                                            font=("Arial", 14, "bold underline"), foreground="dark blue")
+        self.label_travel_history.grid(row=0, column=0, columnspan=2, padx=20, pady=5, sticky="w")
+
+        # Have you traveled outside of your local area in the past 14 days?
+        self.travel_question_label = ttk.Label(self.travel_frame, text="\t(F.) Have you traveled outside of your local area in the past 14 days?")
+        self.travel_question_label.grid(row=1, column=0, columnspan=2, sticky="w")
+
+        # Radio Buttons for Yes and No options
+        self.travel_choice_var = tk.StringVar()
+        self.travel_choice_var.set("No")  # Set the default value to "No"
+        self.travel_choice_yes = ttk.Radiobutton(self.travel_frame, text="Yes", variable=self.travel_choice_var, value="Yes")
+        self.travel_choice_yes.grid(row=2, column=0)
+        self.travel_choice_no = ttk.Radiobutton(self.travel_frame, text="No", variable=self.travel_choice_var, value="No")
+        self.travel_choice_no.grid(row=3, column=0)
+
+        # If yes, provide details
+        self.travel_details_label = ttk.Label(self.travel_frame, text="\n\t(G.) If yes, please provide a brief details of the locations and dates visited:")
+        self.travel_details_label.grid(row=4, column=0, pady=5)
+        self.travel_details_entry = tk.Text(self.travel_frame, height=5, width=50, padx=20, wrap="word", font=("times", 10))
+        self.travel_details_entry.grid(row=5, column=0, pady=5)
 
 if __name__ == "__main__":
     add_contact_window = tk.Tk()

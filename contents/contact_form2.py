@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, PhotoImage
-import tkcalendar
+from buttons import Buttons
 
 class ContactForm2:
     '''Contact Tracing Form'''
@@ -26,8 +26,19 @@ class ContactForm2:
 
         self.emergency_info()
         self.travel_history()
-        self.submit_button()
-        self.previous_window_button()
+
+        self.buttons_handler = Buttons()    # Create an instance of Buttons
+
+        # Create a "SUBMIT" button and bind it to the submit_form method of the Buttons class
+        self.submit_button = tk.Button(text="SUBMIT", width=10, height=2, bg="light blue", activebackground="orange")
+        self.submit_button.pack(side="right", padx=10, pady=10)
+        self.submit_button.bind("<ButtonRelease-1>", lambda event: self.buttons_handler.submit_form())
+
+
+        # Create a "PREVIOUS" button and bind it to the previous_window method of the Buttons class
+        self.previous_button = tk.Button(text="PREVIOUS", width=10, height=2, activebackground="orange")
+        self.previous_button.pack(side="left", padx=10, pady=10)
+        self.previous_button.bind("<Button-1>", self.buttons_handler.previous_window)
 
     def emergency_info(self):
         # Emergency Contact Information Frame
@@ -35,7 +46,7 @@ class ContactForm2:
         self.emergency_frame.place(x=100, y=50, width=700, height=220)
 
         # Label for Emergency Contact Information
-        self.label_emergency_info = tk.Label(self.emergency_frame, text="\nEMERGENCY CONTACT INFORMATION\n", 
+        self.label_emergency_info = tk.Label(self.emergency_frame, text="\nEMERGENCY CONTACT PERSON\n", 
                                             font=("Arial", 14, "bold underline"), foreground="dark blue")
         self.label_emergency_info.grid(row=0, column=0, columnspan=2)
 
@@ -90,20 +101,6 @@ class ContactForm2:
         self.travel_details_label.grid(row=4, column=0, pady=5)
         self.travel_details_entry = tk.Text(self.travel_frame, height=5, width=50, padx=20, wrap="word", font=("times", 10))
         self.travel_details_entry.grid(row=5, column=0, pady=5)
-
-    def previous_window_button(self):
-        self.previous_button = tk.Button(text="PREVIOUS", width=10, height=2, activebackground="orange", command=self.previous_button_clicked)
-        self.previous_button.pack(side="left", padx=10, pady=10)
-
-    def previous_button_clicked(self):
-        print("Previous button clicked")
-
-    def submit_button(self):
-        self.previous_button = tk.Button(text="SUBMIT", width=10, height=2, bg="light blue", activebackground="orange", command=self.submit_button_clicked)
-        self.previous_button.pack(side="right", padx=10, pady=10)
-
-    def submit_button_clicked(self):
-        print("Next button clicked")
 
 if __name__ == "__main__":
     add_contact_window = tk.Tk()

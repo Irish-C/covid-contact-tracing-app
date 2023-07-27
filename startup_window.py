@@ -2,6 +2,8 @@ import os
 import tkinter as tk
 from PIL import Image, ImageTk
 
+from main_buttons import MainButtons
+
 class UI:
     # Initialize root window
     def __init__(self, root):
@@ -11,7 +13,7 @@ class UI:
         self.root.bind("<Configure>", self.update_image_size)
 
         script_dir = os.path.dirname(os.path.abspath(__file__)) # Get the current script directory
-        bg_image_path = os.path.join(script_dir, "image_widgets", "app_bg.png") # Load the background image
+        bg_image_path = os.path.join(script_dir, "image_widgets", "ui.png") # Load the background image
         self.bg_image = Image.open(bg_image_path)
         self.bg_photo = ImageTk.PhotoImage(self.bg_image)
 
@@ -40,33 +42,7 @@ class UI:
         canvas.create_text(160, 20, text="Department of QC DRRMO", font=("Arial", 10, "underline"), activefill="light gray")
         canvas.create_text(850, 20, text="☰", font=("Arial", 15), activefill="white")
 
-        def on_button_hover(event):
-            if event.type == '7':  # Enter event
-                event.widget.config(foreground="black", background="orange")
-                event.widget.master.config(background="orange")  # Update the frame's background
-            elif event.type == '8':  # Leave event
-                event.widget.config(foreground="blue", background=event.widget.original_bg_color)
-                event.widget.master.config(background=event.widget.original_bg_color)  # Reset the frame's background
-
-        # Add contact button with background
-        add_contact_frame = tk.Frame(canvas, bg="white", padx=5, pady=5)
-        canvas.create_window(180, 300, window=add_contact_frame, anchor='nw')
-
-        add_contact_label = tk.Label(add_contact_frame, text="ADD CONTACT", font=("Arial", 12, "bold"))
-        add_contact_label.pack(fill="both", expand=True)
-        add_contact_label.original_bg_color = "light blue"  # Store the original background color
-        add_contact_label.bind("<Enter>", on_button_hover)
-        add_contact_label.bind("<Leave>", on_button_hover)
-
-        # Search contact button with background
-        search_contact_frame = tk.Frame(canvas, bg="white", padx=5, pady=5)
-        canvas.create_window(165, 370, window=search_contact_frame, anchor='nw')
-
-        search_contact_label = tk.Label(search_contact_frame, text="SEARCH CONTACT", font=("Arial", 12, "bold"))
-        search_contact_label.pack(fill="both", expand=True)
-        search_contact_label.original_bg_color = "light blue"  # Store the original background color
-        search_contact_label.bind("<Enter>", on_button_hover)
-        search_contact_label.bind("<Leave>", on_button_hover)
+        main_buttons = MainButtons(canvas)
 
         # [Icons] Privacy policy, contact us, and exit
         canvas.create_text(150, 550, text="Privacy Policy", font=("Arial", 10), activefill="light gray")
@@ -76,6 +52,15 @@ class UI:
     
     def exit_click(self, event):    # Exit main window
         self.root.destroy()
+
+    def privacy_policy(self, event):
+        pass
+
+    def contact_us(self, event):
+        pass
+
+    def menu(self, event):
+        pass
 
     def update_image_size(self, event):
         '''Update image size when window is resized'''

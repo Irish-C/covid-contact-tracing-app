@@ -1,0 +1,2 @@
+class SearchDataUI:
+    pass

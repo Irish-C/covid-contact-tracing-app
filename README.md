@@ -2,24 +2,32 @@
 This python program contains Contact Tracing App incorporating object-oriented and event-driven programming including GUI. When the program runs, please expect a window that displays digital interface of a COVID Contact Tracing Form. You, as the user, will be asked necessary information for contact tracing. 
 - Checkout ```form_reference.txt``` in this repository to preview all the required information and use it as your guide to know what contents are included in the form **without running the program.**
 
+
 # Getting Started
 ## Installation
 - To get started, you'll need to have [Python 3](https://www.python.org/downloads/) installed on your computer Also, I used [VS Code](https://code.visualstudio.com/download) to create and run the program.
 
+
 ## Dependencies
 To install the necessary modules, open up your terminal or command prompt and type:`
+- ```pip install tkcalendar```
 - ```pip install _______```
-- ```pip install _______```
+
 
 # Program Run
 1. Clone or download the repository.
-    - ```git clone <repository link>```
+- ```git clone <repository link>```
 2. *Run python file* whichever button available in your IDE or run through *terminal*.
     - ```cd <Copy Path>```
         - cd means change directory. Find the folder in your IDE and copy path.
     - ```python <file name>.py```
         - this will run your chosen file. In this case, ```main.py``` of any folder.
-3. The program will run. Scroll down to know how it works.
+
+```
+git clone COVID-contact-tracing-app
+cd ./COVID-contact-tracing-app
+```
+
 
 ## Demo
 1. 

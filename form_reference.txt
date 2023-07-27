@@ -9,26 +9,18 @@ Address:
 
 HEALTH INFORMATION
 ▪ Have you experienced any symptoms associated with COVID-19 in the past 14 days? (Fever, cough, shortness of breath, loss of taste or smell, etc.) (yes/no)
-▪ If yes, please provide details of the symptoms experienced:
-Date of symptom onset:
 ▪ Have you been tested for COVID-19? (Yes/No)
 ▪ If yes, please provide the date of the test and the result:
 
-CONTACT INFORMATION
-Please provide the names and contact details (phone number or email address) of individuals you have been in close contact with in the past 14 days. Close contact is defined as being within 6 feet of a person who has tested positive for COVID-19 for a cumulative total of 15 minutes or more over a 24-hour period.
-
+EMERGENCY CONTACT INFORMATION
 Name:
-Phone Number:
-Email Address:
-
-Name:
-Phone Number:
-Email Address:
+Phone Number/email:
+Address:
+Relationship with the contact person:
 
 Travel History:
 ▪ Have you traveled outside of your local area in the past 14 days? (Yes/No)
-▪ If yes, please provide details of the locations and dates visited:
-Consent
+▪ If yes, please provide a brief details of the locations and dates visited:
 
 
 CONSENT

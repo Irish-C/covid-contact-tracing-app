@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, PhotoImage
 import tkcalendar
+from buttons import Buttons
 
 class ContactForm:
     '''Contact Tracing Form'''
@@ -22,11 +23,16 @@ class ContactForm:
         # Heading
         self.canvas.create_text(320,25, text="CONTACTRACINGFORM", font=("Arial", 25, "bold"), fill="blue")
         self.canvas.create_text(341,25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
+        
         # Call personal info and health info methods
-
         self.personal_info()
         self.health_info()
-        self.next_window_button()
+
+        self.buttons_handler = Buttons()
+
+        self.next_button = tk.Button(text="NEXT", width=10, height=2, activebackground="orange")
+        self.next_button.pack(side="bottom", anchor="se", padx=10, pady=10)
+        self.next_button.bind("<Button-1>", self.buttons_handler.next_window)
 
     def personal_info(self):
         '''Ask user of their personal information'''
@@ -187,17 +193,8 @@ class ContactForm:
         self.result_choice.grid(row=len(symptoms_checkboxes)+9, column=1)
 
         # Bind the enable_disable_date_result_fields function to the testing_choice combobox event
-        self.testing_choice.bind("<<ComboboxSelected>>", enable_disable_date_result_fields)  
-
-
-    def next_window_button(self):
-        self.next_button = tk.Button(text="NEXT", width=10, height=2, activebackground="orange", command=self.next_button_clicked)
-        self.next_button.pack(side="bottom", anchor="se", padx=10, pady=10)
-
-    def next_button_clicked(self):
-        print("Next button clicked")
+        self.testing_choice.bind("<<ComboboxSelected>>", enable_disable_date_result_fields)   
         
-
 if __name__ == "__main__":
     add_contact_window= tk.Tk()
     app = ContactForm(add_contact_window)

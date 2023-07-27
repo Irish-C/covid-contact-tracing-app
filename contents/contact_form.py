@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import PhotoImage
 
 import re
@@ -11,29 +12,46 @@ class ContactForm:
         self.add_contact_window.title("ContacTracing Form")
         self.add_contact_window.geometry("900x620+{}+{}".format(int(self.add_contact_window.winfo_screenwidth() / 2 - 450), 0))
 
-        self.image = PhotoImage(file="image_widgets/app_bg.png")    # Load the image using PhotoImage
+        self.image = PhotoImage(file="image_widgets/ui_bg.png")    # Load the image using PhotoImage
         
-                            # # Create a label with the loaded image as the background
-                            # self.background_label = tk.Label(self.add_contact_window, image=self.image)
-                            # self.background_label.pack(fill=tk.BOTH, expand=tk.YES)
-
         # Create a canvas inside the add_contact_window
         self.canvas = tk.Canvas(self.add_contact_window, bd=0)
         self.canvas.pack(fill="both", expand=True)
-
-        # Personal Information inside the canvas
-        self.personal_info_frame = tk.Frame(self.canvas, bg="")
-        self.personal_info_frame.pack()
 
         # Load and display the background image on the canvas
         self.canvas.image = self.image  # Keep a reference to the image
         self.canvas.create_image(0, 0, anchor='nw', image=self.image)
         
+        '''Ask user of their personal information'''
+        # Personal Information inside the canvas
+        self.personal_info_frame = tk.Frame(self.canvas)
+        self.personal_info_frame.pack(padx=100, pady=50)
+
+        # Label for Personal Information
+        self.label_personal_info = tk.Label(self.personal_info_frame, text="\nPERSONAL INFORMATION\n", font=("Arial", 11),justify="center")
+        self.label_personal_info.grid(row=0, column=0, columnspan=5)
+
         # Create labels and entry fields for personal information
-        self.label_first_name = tk.Label(self.personal_info_frame, text="First Name:")
-        self.label_first_name.grid(row=0, column=0)
-        self.entry_first_name = tk.Entry(self.personal_info_frame)
-        self.entry_first_name.grid(row=0, column=1)
+        self.name_label = tk.Label(self.personal_info_frame, text="Name:", font=("Arial", 11))
+        self.name_label.grid(row=1, column=0)
+
+        self.entry_first_name = tk.Entry(self.personal_info_frame, justify="center")
+        self.entry_first_name.grid(row=1, column=1)
+        self.entry_last_name = tk.Entry(self.personal_info_frame, justify="center")
+        self.entry_last_name.grid(row=1, column=2)
+        self.entry_middle_initial = tk.Entry(self.personal_info_frame, justify="center",)
+        self.entry_middle_initial.grid(row=1, column=3)
+        self.entry_name_suffix = ttk.Combobox(self.personal_info_frame, values=["", "Sr.", "Jr.", "III", "IV"])
+        self.entry_name_suffix.grid(row=1, column=4)
+
+        self.label_first_name = tk.Label(self.personal_info_frame, text="First Name", font=("Arial", 9, "italic"))
+        self.label_first_name.grid(row=2, column=1)
+        self.label_last_name = tk.Label(self.personal_info_frame, text="Last Name", font=("Arial", 9, "italic"))
+        self.label_last_name.grid(row=2, column=2)
+        self.label_middle_initial = tk.Label(self.personal_info_frame, text="M.I.", font=("Arial", 9, "italic"))
+        self.label_middle_initial.grid(row=2, column=3)
+        self.label_name_suffix = tk.Label(self.personal_info_frame, text="Suffix", font=("Arial", 9, "italic"))
+        self.label_name_suffix.grid(row=2, column=4)
 
     # # PERSONAL INFORMATION
     # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):

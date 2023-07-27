@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, PhotoImage
-
-import tkcalendar, re
+import tkcalendar
 
 class ContactForm:
     '''Contact Tracing Form'''
@@ -11,12 +10,7 @@ class ContactForm:
         self.add_contact_window.geometry("900x620+{}+{}".format(int(self.add_contact_window.winfo_screenwidth() / 2 - 450), 0))
 
         self.image = PhotoImage(file="image_widgets/ui.png")    # Load the image using PhotoImage
-        
-        # Call personal info and health info methods
-        self.personal_info()
-        self.health_info()
 
-    def personal_info(self):
         # Create a canvas inside the add_contact_window
         self.canvas = tk.Canvas(self.add_contact_window, bd=0)
         self.canvas.pack(fill="both", expand=True)
@@ -28,10 +22,16 @@ class ContactForm:
         # Heading
         self.canvas.create_text(320,25, text="CONTACTRACINGFORM", font=("Arial", 25, "bold"), fill="blue")
         self.canvas.create_text(341,25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
+        # Call personal info and health info methods
 
+        self.personal_info()
+        self.health_info()
+        self.next_window_button()
+
+    def personal_info(self):
         '''Ask user of their personal information'''
         # Personal Information inside the canvas
-        self.personal_info_frame = tk.Frame(self.canvas, borderwidth=10, highlightthickness=1, highlightbackground="gray")
+        self.personal_info_frame = tk.Frame(self.add_contact_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
         self.personal_info_frame.place(x=100, y=50, width=700, height=220)
 
         # Label for Personal Information
@@ -97,7 +97,7 @@ class ContactForm:
                                            text="\t(A.) Have you been vaccinated?")
         self.vaccination_label.grid(row=1, column=0, sticky="w")
         self.vaccination_choice = ttk.Combobox(self.health_frame, 
-                                               values=["1st shot", "2nd shot", "Not yet", "1st Booster", "2nd Booster"])
+                                               values=["Not yet", "1st shot", "2nd shot", "1st Booster", "2nd Booster"])
         self.vaccination_choice.grid(row=1, column=1)
 
         # COVID symptoms
@@ -187,38 +187,16 @@ class ContactForm:
         self.result_choice.grid(row=len(symptoms_checkboxes)+9, column=1)
 
         # Bind the enable_disable_date_result_fields function to the testing_choice combobox event
-        self.testing_choice.bind("<<ComboboxSelected>>", enable_disable_date_result_fields)      
-    # # PERSONAL INFORMATION
-    # def set_personal_information(self, first_name, last_name, phone_number, email_address, address):
-    #     '''
-    #     Reformat and validate user input for personal information
-    #     '''
+        self.testing_choice.bind("<<ComboboxSelected>>", enable_disable_date_result_fields)  
 
-    #     # Format and set the full name
-    #     self.__fullname = '{} {}'.format(first_name.capitalize(), last_name.capitalize())
 
-        # Validate email address format
-        # if not re.match(r"[^@]+@[^@]+\.[^@]+", email_address):
-        #     raise ValueError("Invalid email address.")
-        # self.__email_address = email_address
+    def next_window_button(self):
+        self.next_button = tk.Button(text="NEXT", width=10, height=2, activebackground="orange", command=self.next_button_clicked)
+        self.next_button.pack(side="bottom", anchor="se", padx=10, pady=10)
 
-        # # Set the address
-        # self.__address = address
-
-    #     # Set the address
-    #     self.__address = address
-
-    # # A method that add close contact into lists
-    # def add_close_contact(self, name, contact_details):
-    #     self.close_contacts.append({'name': name, 'contact_details': contact_details})
-
-    # # A method that add travel history into lists
-    # def add_travel_history(self, location, date):
-    #     self.travel_history.append({'location': location, 'date': date})
-
-    # # A method that sets consent to TRUE
-    # def give_consent(self):
-    #     self.consent = True
+    def next_button_clicked(self):
+        print("Next button clicked")
+        
 
 if __name__ == "__main__":
     add_contact_window= tk.Tk()

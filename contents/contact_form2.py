@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, PhotoImage
 import tkcalendar
 
-class ContactForm:
+class ContactForm2:
     '''Contact Tracing Form'''
     def __init__(self, add_contact_window):
         self.add_contact_window = add_contact_window
@@ -26,6 +26,8 @@ class ContactForm:
 
         self.emergency_info()
         self.travel_history()
+        self.submit_button()
+        self.previous_window_button()
 
     def emergency_info(self):
         # Emergency Contact Information Frame
@@ -64,7 +66,7 @@ class ContactForm:
     def travel_history(self):
         # Travel History Frame
         self.travel_frame = tk.Frame(self.add_contact_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
-        self.travel_frame.place(x=100, y=260, width=700, height=300)
+        self.travel_frame.place(x=100, y=260, width=700, height=310)
 
         # Label for Travel History
         self.label_travel_history = tk.Label(self.travel_frame, text="TRAVEL HISTORY", 
@@ -89,7 +91,21 @@ class ContactForm:
         self.travel_details_entry = tk.Text(self.travel_frame, height=5, width=50, padx=20, wrap="word", font=("times", 10))
         self.travel_details_entry.grid(row=5, column=0, pady=5)
 
+    def previous_window_button(self):
+        self.previous_button = tk.Button(text="PREVIOUS", width=10, height=2, activebackground="orange", command=self.previous_button_clicked)
+        self.previous_button.pack(side="left", padx=10, pady=10)
+
+    def previous_button_clicked(self):
+        print("Previous button clicked")
+
+    def submit_button(self):
+        self.previous_button = tk.Button(text="SUBMIT", width=10, height=2, bg="light blue", activebackground="orange", command=self.submit_button_clicked)
+        self.previous_button.pack(side="right", padx=10, pady=10)
+
+    def submit_button_clicked(self):
+        print("Next button clicked")
+
 if __name__ == "__main__":
     add_contact_window = tk.Tk()
-    app = ContactForm(add_contact_window)
+    app = ContactForm2(add_contact_window)
     add_contact_window.mainloop()

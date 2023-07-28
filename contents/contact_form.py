@@ -195,6 +195,27 @@ class ContactForm:
         # Bind the enable_disable_date_result_fields function to the testing_choice combobox event
         self.testing_choice.bind("<<ComboboxSelected>>", enable_disable_date_result_fields)   
         
+    def get_entries(self):
+        '''Return the user input as a dictionary'''
+        entries = {
+            "First Name": self.entry_first_name.get(),
+            "Last Name": self.entry_last_name.get(),
+            "Middle Initial": self.entry_middle_initial.get(),
+            "Name Suffix": self.entry_name_suffix.get(),
+            "Phone Number": self.phone_entry.get(),
+            "Email": self.email_entry.get(),
+            "Address": self.address_entry.get(),
+            "Vaccination Status": self.vaccination_choice.get(),
+            "COVID Symptoms": self.symptoms_choice.get(),
+            "Other Symptoms": self.other_symptoms_entry.get() if self.symptoms_checkboxes[-1][1].get() == 1 else "",
+            "Tested for COVID": self.testing_choice.get(),
+            "Testing Date": self.date_entry.get() if self.testing_choice.get() == "Yes" else "",
+            "Test Result": self.result_choice.get() if self.testing_choice.get() == "Yes" else "",
+            "Travel History": self.travel_choice_var.get(),
+            "Travel Details": self.travel_details_entry.get("1.0", "end-1c"),
+        }
+        return entries
+
 if __name__ == "__main__":
     add_contact_window= tk.Tk()
     app = ContactForm(add_contact_window)

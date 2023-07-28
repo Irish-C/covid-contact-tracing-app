@@ -46,7 +46,7 @@ class Buttons:
 
     def submit_form(self):
         try:
-            # Get the user input (same code as before)
+            # Get the user input
             user_input = {
                 "First Name": self.first_name_entry.get(),
                 "Last Name": self.last_name_entry.get(),

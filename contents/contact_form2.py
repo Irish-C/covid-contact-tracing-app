@@ -3,8 +3,9 @@ from tkinter import ttk, PhotoImage
 from buttons import Buttons
 
 class ContactForm2:
-    '''Contact Tracing Form'''
+    '''Contact Tracing Form - Second Window'''
     def __init__(self, add_contact_window):
+        self.buttons_handler = Buttons(None, self)
         self.add_contact_window = add_contact_window
         self.add_contact_window.title("Contact Tracing Form")
         self.add_contact_window.geometry("900x620+{}+{}".format(int(self.add_contact_window.winfo_screenwidth() / 2 - 450), 0))
@@ -20,20 +21,19 @@ class ContactForm2:
         self.canvas.create_image(0, 0, anchor='nw', image=self.image)
 
         # Heading
-        self.canvas.create_text(320,25, text="CONTACTRACINGFORM", font=("Arial", 25, "bold"), fill="blue")
+        self.canvas.create_text(320,25, text="CONTACT TRACING FORM", font=("Arial", 25, "bold"), fill="blue")
         self.canvas.create_text(341,25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
-        # Call personal info and health info methods
 
+        # Call emergency_info and travel_history methods
         self.emergency_info()
         self.travel_history()
 
-        self.buttons_handler = Buttons()    # Create an instance of Buttons
+        self.buttons_handler = Buttons(None, self)
 
         # Create a "SUBMIT" button and bind it to the submit_form method of the Buttons class
         self.submit_button = tk.Button(text="SUBMIT", width=10, height=2, bg="light blue", activebackground="orange")
         self.submit_button.pack(side="right", padx=10, pady=10)
         self.submit_button.bind("<ButtonRelease-1>", lambda event: self.buttons_handler.submit_form())
-
 
         # Create a "PREVIOUS" button and bind it to the previous_window method of the Buttons class
         self.previous_button = tk.Button(text="PREVIOUS", width=10, height=2, activebackground="orange")
@@ -43,7 +43,7 @@ class ContactForm2:
         # Create an "EXIT" button and bind it to the exit_application method
         self.exit_button = tk.Button(text="EXIT", width=10, height=2, bg="light pink", activebackground="orange", command=self.exit_application)
         self.exit_button.pack(side="right", padx=10, pady=10)
-    
+
     def exit_application(self):
         self.add_contact_window.destroy()
 
@@ -117,10 +117,10 @@ class ContactForm2:
             "Emergency Address": self.other_address_entry.get(),
             "Relationship": self.entry_name_suffix.get(),
             "Travel History": self.travel_choice_var.get(),
-            "Travel Details": self.travel_details_entry.get("1.0", "end-1c"),  # Retrieves text from the Text widget
+            "Travel Details": self.travel_details_entry.get("1.0", "end-1c"),
         }
         return entries2
-    
+
 if __name__ == "__main__":
     add_contact_window = tk.Tk()
     app = ContactForm2(add_contact_window)

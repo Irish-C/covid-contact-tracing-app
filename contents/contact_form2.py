@@ -1,19 +1,20 @@
+# contact_form2.py
 import tkinter as tk
 from tkinter import ttk, PhotoImage
 from buttons import Buttons
 
 class ContactForm2:
     '''Contact Tracing Form - Second Window'''
-    def __init__(self, add_contact_window):
+    def __init__(self, second_window):
         self.buttons_handler = Buttons(None, self)
-        self.add_contact_window = add_contact_window
-        self.add_contact_window.title("Contact Tracing Form")
-        self.add_contact_window.geometry("900x620+{}+{}".format(int(self.add_contact_window.winfo_screenwidth() / 2 - 450), 0))
+        self.second_window = second_window
+        self.second_window.title("Contact Tracing Form")
+        self.second_window.geometry("900x620+{}+{}".format(int(self.second_window.winfo_screenwidth() / 2 - 450), 0))
 
         self.image = PhotoImage(file="image_widgets/ui.png")    # Load the image using PhotoImage
 
-        # Create a canvas inside the add_contact_window
-        self.canvas = tk.Canvas(self.add_contact_window, bd=0)
+        # Create a canvas inside the second_window
+        self.canvas = tk.Canvas(self.second_window, bd=0)
         self.canvas.pack(fill="both", expand=True)
 
         # Load and display the background image on the canvas
@@ -31,25 +32,25 @@ class ContactForm2:
         self.buttons_handler = Buttons(None, self)
 
         # Create a "SUBMIT" button and bind it to the submit_form method of the Buttons class
-        self.submit_button = tk.Button(text="SUBMIT", width=10, height=2, bg="light blue", activebackground="orange")
+        self.submit_button = tk.Button(self.second_window, text="SUBMIT", width=10, height=2, bg="light blue", activebackground="orange")
         self.submit_button.pack(side="right", padx=10, pady=10)
         self.submit_button.bind("<ButtonRelease-1>", lambda event: self.buttons_handler.submit_form())
 
         # Create a "PREVIOUS" button and bind it to the previous_window method of the Buttons class
-        self.previous_button = tk.Button(text="PREVIOUS", width=10, height=2, activebackground="orange")
+        self.previous_button = tk.Button(self.second_window, text="PREVIOUS", width=10, height=2, activebackground="orange")
         self.previous_button.pack(side="left", padx=10, pady=10)
         self.previous_button.bind("<Button-1>", self.buttons_handler.previous_window)
 
         # Create an "EXIT" button and bind it to the exit_application method
-        self.exit_button = tk.Button(text="EXIT", width=10, height=2, bg="light pink", activebackground="orange", command=self.exit_application)
+        self.exit_button = tk.Button(self.second_window, text="EXIT", width=10, height=2, bg="light pink", activebackground="orange", command=self.exit_application)
         self.exit_button.pack(side="right", padx=10, pady=10)
 
     def exit_application(self):
-        self.add_contact_window.destroy()
+        self.second_window.destroy()
 
     def emergency_info(self):
         # Emergency Contact Information Frame
-        self.emergency_frame = tk.Frame(self.add_contact_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
+        self.emergency_frame = tk.Frame(self.second_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
         self.emergency_frame.place(x=100, y=50, width=700, height=220)
 
         # Label for Emergency Contact Information
@@ -83,7 +84,7 @@ class ContactForm2:
 
     def travel_history(self):
         # Travel History Frame
-        self.travel_frame = tk.Frame(self.add_contact_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
+        self.travel_frame = tk.Frame(self.second_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")
         self.travel_frame.place(x=100, y=260, width=700, height=310)
 
         # Label for Travel History
@@ -122,6 +123,6 @@ class ContactForm2:
         return entries2
 
 if __name__ == "__main__":
-    add_contact_window = tk.Tk()
-    app = ContactForm2(add_contact_window)
-    add_contact_window.mainloop()
+    second_window = tk.Tk()
+    app2 = ContactForm2(second_window)
+    second_window.mainloop()

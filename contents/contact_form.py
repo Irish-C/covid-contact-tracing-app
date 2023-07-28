@@ -1,7 +1,9 @@
+# contact_form.py
 import tkinter as tk
 from tkinter import ttk, PhotoImage
-import tkcalendar
+import tkcalendar, subprocess
 from buttons import Buttons
+from contact_form2 import ContactForm2
 
 class ContactForm:
     '''Contact Tracing Form'''
@@ -36,10 +38,16 @@ class ContactForm:
         self.next_button.bind("<Button-1>", self.next_window_and_submit_form)
 
     def next_window_and_submit_form(self, event):
-        # Call the submit_form method of the Buttons class to save the data to CSV
-        self.buttons_handler.submit_form()
-        self.buttons_handler.next_window(self.get_entries())
+        user_input = self.buttons_handler.submit_form()
+        if user_input == True:
+            self.second_window = tk.Toplevel(self.add_contact_window)
+            app2 = ContactForm2(self.second_window)
 
+            # Keep the second window on top
+            self.second_window.attributes("-topmost", True)
+            self.second_window.focus_force()
+            self.second_window.attributes("-topmost", False)
+    
     def personal_info(self):
         '''Ask user of their personal information'''
         # Personal Information inside the canvas

@@ -1,45 +1,30 @@
+# button.py
 import tkinter as tk
 from tkinter import messagebox
-import re, csv, subprocess
+import re, subprocess
+
 
 class Buttons:
     def __init__(self, contact_form_instance, contact_form2_instance):
         self.contact_form_instance = contact_form_instance
         self.contact_form2_instance = contact_form2_instance
+        self.previous_window_entries = None
+        self.user_data = None
 
     def next_window(self, event):
-        subprocess.Popen(["python", "contact_form2.py"])
+        subprocess.call(["python", "contact_form2.py"])
+        self.previous_window_entries = None  # Reset previous window entries
+        if self.contact_form_instance:
+            self.previous_window_entries = self.contact_form_instance.get_entries()
+        elif self.contact_form2_instance:
+            self.previous_window_entries = self.contact_form2_instance.get_entries2()
 
     def previous_window(self, event):
-        subprocess.Popen(["python", "contact_form.py"])
+        self.contact_form2_instance.second_window.destroy()  # Close the current window
+        subprocess.run(["python", "contact_form.py"]) 
 
-    def save_to_csv(self, user_input):
-        fieldnames = [
-            "First Name", "Last Name", "Middle Initial", "Name Suffix",
-            "Phone Number", "Email", "Address", "Vaccination Status",
-            "COVID Symptoms", "Other Symptoms", "Tested for COVID",
-            "Testing Date", "Test Result", "Emergency Name", "Emergency Phone/Email",
-            "Emergency Address", "Relationship", "Travel History", "Travel Details"
-        ]
-
-        file_path = "contact_form_data.csv"
-
-        if not user_input:
-            return
-
-        # # Check if the file exists or create a new one
-        # if tk.messagebox.askyesno("File Exists", "Do you want to append to the existing file?"):
-        #     file_mode = "a"
-        else:
-            file_mode = "w"
-
-        with open(file_path, mode=file_mode, newline="") as file:
-            writer = csv.DictWriter(file, fieldnames=fieldnames)
-
-            if file_mode == "w":
-                writer.writeheader()
-
-            writer.writerow(user_input)
+    def save_data(self, user_input):
+        self.user_data = user_input
 
     def submit_form(self):
         user_input = None
@@ -57,19 +42,20 @@ class Buttons:
             email_address = user_input["Email"]
 
             fullname = '{} {}'.format(first_name.capitalize(), last_name.capitalize())
-            if len(phone_number) != 11:
+            if len(phone_number) != 1:
                 raise ValueError("Phone number must have 11 digits.")
-            if not re.match(r"[^@]+@[^@]+\.[^@]+", email_address):
-                raise ValueError("Invalid email address.")
+            # if not re.match(r"[^@]+@[^@]+\.[^@]+", email_address):
+            #     raise ValueError("Invalid email address.")
 
-            # Save data to CSV file after form validation passes
-            self.save_to_csv(user_input)
+            # tk.messagebox.showinfo("Success", "Alright!")
 
-            # # Display a success message if the form is submitted successfully
-            # tk.messagebox.showinfo("Success", "Form submitted successfully!")
+            # Save the form data and proceed to the next window
+            self.save_data(user_input)
 
-
+            return True
 
         except Exception as e:
             # Display an error message if form validation fails or an error occurs
             tk.messagebox.showerror("Error", str(e))
+
+            return False

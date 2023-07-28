@@ -1,3 +1,4 @@
+# startup_window.py
 import os
 import tkinter as tk
 from PIL import Image, ImageTk

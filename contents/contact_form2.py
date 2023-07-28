@@ -40,6 +40,13 @@ class ContactForm2:
         self.previous_button.pack(side="left", padx=10, pady=10)
         self.previous_button.bind("<Button-1>", self.buttons_handler.previous_window)
 
+        def exit_application(self):
+            self.add_contact_window.destroy()
+
+        # Create an "EXIT" button and bind it to the exit_application method
+        self.exit_button = tk.Button(text="EXIT", width=10, height=2, bg="light pink", activebackground="orange", command=exit_application)
+        self.exit_button.pack(side="right", padx=10, pady=10)
+    
     def emergency_info(self):
         # Emergency Contact Information Frame
         self.emergency_frame = tk.Frame(self.add_contact_window, borderwidth=10, highlightthickness=1, highlightbackground="gray")

@@ -2,13 +2,15 @@
 import tkinter as tk
 from tkinter import messagebox
 import re, subprocess, csv, os
+import shutil
 
 class Buttons:
     def __init__(self, contact_form_instance, contact_form2_instance):
         self.contact_form_instance = contact_form_instance
         self.contact_form2_instance = contact_form2_instance
         self.previous_window_entries = None
-        
+        self.user_data = None
+
     def next_window(self, event):
         subprocess.call(["python", "contact_form2.py"])
         self.previous_window_entries = None  # Reset previous window entries
@@ -57,3 +59,45 @@ class Buttons:
             tk.messagebox.showerror("Error", str(e))
 
             return False
+
+    def submit_form2(self):
+        user_input2 = None
+
+        if self.contact_form_instance:
+            user_input2 = self.contact_form_instance.get_entries()
+        elif self.contact_form2_instance:
+            user_input2 = self.contact_form2_instance.get_entries2()
+
+        try:
+            dictlist2 = []
+            for key, value in user_input2.items():
+                entry_dict = {'key': key, 'value': value}
+                dictlist2.append(entry_dict)
+
+            # Save the form data and proceed to the next window
+            self.save_data2(dictlist2)
+            self.save_data_to_csv('contact-tracing-data.csv')
+
+            return True
+
+        except Exception as e:
+            # Display an error message if form validation fails or an error occurs
+            tk.messagebox.showerror("Error", str(e))
+
+            return False
+
+    def save_data2(self, user_input):
+        self.user_data = user_input
+
+    def save_data_to_csv(self, filename):
+        if self.user_data is not None:
+            current_directory = os.getcwd()  # Get the current directory
+            csv_file_path = os.path.join(current_directory, '..', 'contact-tracing-form')
+
+        with open(csv_file_path, 'w', newline='') as data_file:
+            writer = csv.writer(data_file)
+            writer.writerow(['Key', 'Value'])  # Write header row
+            for entry in self.user_data:
+                writer.writerow([entry['key'], entry['value']])
+        
+        tk.messagebox.showinfo("Success", "Saved Succesfully!")

@@ -93,4 +93,28 @@ headings = [
 # Create the Treeview widget to display the search results in a table
 result_tree = ttk.Treeview(root, columns=headings, show="headings")
 
+# Set up the column headings and width with proper alignment
+for col, heading in enumerate(headings):
+    result_tree.heading(heading, text=heading)
+    result_tree.column(heading, width=150)
+    
+# Define the maximum number of rows to display
+max_display_rows = 20
+
+# Displaying data with proper alignment by row
+if csv_data is not None:
+    for row in csv_data:
+        # Fill in empty cells with a blank string
+        for i in range(len(row)):
+            if not row[i]:
+                row[i] = ""
+        result_tree.insert("", "end", values=row)
+
+        # Limit the number of rows displayed
+        if result_tree.get_children().__len__() >= max_display_rows:
+            break
+
+result_tree.pack()
+result_tree.pack(fill="both", expand=True)
+
 root.mainloop()

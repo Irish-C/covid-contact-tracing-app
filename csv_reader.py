@@ -117,4 +117,14 @@ if csv_data is not None:
 result_tree.pack()
 result_tree.pack(fill="both", expand=True)
 
+# Add a vertical scrollbar to navigate through the rows
+vertical_slider = ttk.Scrollbar(root, orient="vertical", command=result_tree.yview)
+vertical_slider.pack(side="right", fill="y")
+result_tree.configure(yscrollcommand=vertical_slider.set)
+
+# Add a horizontal scrollbar to navigate through the columns
+horizontal_slider = ttk.Scrollbar(root, orient="horizontal", command=result_tree.xview)
+horizontal_slider.pack(side="bottom", fill="x")
+result_tree.configure(xscrollcommand=horizontal_slider.set)
+
 root.mainloop()

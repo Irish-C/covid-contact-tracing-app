@@ -24,7 +24,7 @@ class ContactForm:
 
         # Heading
         self.canvas.create_text(320, 25, text="CONTACT TRACING FORM", font=("Arial", 25, "bold"), fill="blue")
-        self.canvas.create_text(341, 25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
+        self.canvas.create_text(352, 25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
 
         # Call personal info and health info methods
         self.personal_info()
@@ -34,8 +34,15 @@ class ContactForm:
 
         # Create the "NEXT" button and bind it to the next_window_and_submit_form method
         self.next_button = tk.Button(text="NEXT", width=10, height=2, activebackground="orange")
-        self.next_button.pack(side="bottom", anchor="se", padx=10, pady=10)
+        self.next_button.pack(side="right", padx=10, pady=10)
         self.next_button.bind("<Button-1>", self.next_window_and_submit_form)
+
+        # Create an "EXIT" button and bind it to the exit_application method
+        self.exit_button = tk.Button(self.add_contact_window, text="EXIT", width=10, height=2, bg="light pink", activebackground="orange", command=self.exit_application)
+        self.exit_button.pack(side="right", padx=10, pady=10)
+
+    def exit_application(self):
+        self.add_contact_window.destroy()
 
     def next_window_and_submit_form(self, event):
         user_input = self.buttons_handler.submit_form()

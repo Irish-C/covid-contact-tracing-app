@@ -23,7 +23,7 @@ class ContactForm2:
 
         # Heading
         self.canvas.create_text(320,25, text="CONTACT TRACING FORM", font=("Arial", 25, "bold"), fill="blue")
-        self.canvas.create_text(341,25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
+        self.canvas.create_text(352,25, text="TRACING", font=("Arial", 25, "bold"), fill="red")
 
         # Call emergency_info and travel_history methods
         self.emergency_info()
@@ -34,7 +34,7 @@ class ContactForm2:
         # Create a "SUBMIT" button and bind it to the submit_form method of the Buttons class
         self.submit_button = tk.Button(self.second_window, text="SUBMIT", width=10, height=2, bg="light blue", activebackground="orange")
         self.submit_button.pack(side="right", padx=10, pady=10)
-        self.submit_button.bind("<ButtonRelease-1>", lambda event: self.buttons_handler.submit_form())
+        self.submit_button.bind("<ButtonRelease-1>", lambda event: self.buttons_handler.submit_form2())
 
         # Create a "PREVIOUS" button and bind it to the previous_window method of the Buttons class
         self.previous_button = tk.Button(self.second_window, text="PREVIOUS", width=10, height=2, activebackground="orange")

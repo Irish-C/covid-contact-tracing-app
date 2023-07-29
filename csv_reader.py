@@ -35,11 +35,31 @@ def search_csv(search_term, csv_data):
 
 def on_search_button_click():
     '''
-    Callback function for search button click.
+    Callback function triggered 
+    when the search button is clicked.
     '''
+    search_term = search_entry.get()
+    if search_term:
+        results = search_csv(search_term, csv_data)
+        display_results(results)
 
-def display_results():
-    pass
+def display_results(results):
+    """
+    Updates the result_tree widget to display the given results.
+    """
+    # Clear the existing content in result_tree
+    result_tree.delete(*result_tree.get_children())
+    for row in results:
+        # Fill in empty cells with a blank string
+        for i in range(len(row)):
+            if not row[i]:
+                row[i] = ""
+        # Insert the row into the result_tree as a new entry
+        result_tree.insert("", "end", values=row)
+
+# Navigate CSV file
+csv_file_path = 'contact-tracing-data.csv'
+csv_data = read_csv_file(csv_file_path)
 
 # Create Tkinter application
 root = tk.Tk()
@@ -61,3 +81,16 @@ search_entry.pack()
 
 search_button = tk.Button(root, text="Search", command=on_search_button_click)
 search_button.pack()
+
+# Define the sample headings for the table
+headings = [
+    "First Name", "Last Name", "Middle Initial", "Name Suffix", "Phone Number", "Email", "Address",
+    "Vaccination Status", "COVID Symptoms", "Other Symptoms", "Tested for COVID", "Testing Date",
+    "Test Result", "Emergency Name", "Emergency Phone/Email", "Emergency Address", "Relationship",
+    "Travel History", "Travel Details"
+]
+
+# Create the Treeview widget to display the search results in a table
+result_tree = ttk.Treeview(root, columns=headings, show="headings")
+
+root.mainloop()

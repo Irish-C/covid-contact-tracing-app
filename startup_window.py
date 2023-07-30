@@ -70,7 +70,3 @@ class UI:
         self.__bg_photo = ImageTk.PhotoImage(self.__resized_bg_image)
         self.__bg_label.config(image=self.__bg_photo)   # Update the image on the label
 
-if __name__ == "__main__":  
-    root = tk.Tk()
-    app = UI(root)
-    root.mainloop()

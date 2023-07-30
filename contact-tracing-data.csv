@@ -1,3 +1,7 @@
-First Name,Last Name,Middle Initial,Name Suffix,Phone Number,Email,Address,Vaccination Status,COVID Symptoms,Other Symptoms,Tested for COVID,Testing Date,Test Result,
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,
+First Name,Last Name,Middle Initial,Name Suffix,Phone Number,Email,Address,Vaccination Status,COVID Symptoms,Other Symptoms,Tested for COVID,Testing Date,Test Result, Emergency Phone/Email, Emergency Address, Relationship, Travel History, Travel Details
+Louis,Hoffman,M.,III,09876543210,hoffman@gmail.com,"Winden St., Berlin, Germany",2nd shot,Yes,loss of taste,,07/05/2023,Negative,Agnes Nielsen,09876543211,"Winden St., Berlin, Germany",Relatives,"Yes","I was in Palawan for vacation."
+Lisa, Vicari,H.,N/A,09123456782,N/A,"Winden St., Berlin, Germany", Not yet,No,,,,,Jordis Triebel,agnes@hotmail.com,"Winden St., Berlin, Germany",Parent,None
+Karoline,Eichhorn,N/A,N/A,N/A,karoline@yahoo.com,"Winden St., Berlin, Germany",2nd Booster,Yes,Fever,Loss of smell,06/23/2023,Pending,Maja Karoline,karol@yahoo.com,"Winden St., Berlin, Germany",Sibling,No
+Oliver,Masucci,N/A,N/A,09234567890,N/A,"Winden St., Berlin, Germany",1st Booster,No,,,,,Peter Masucci,,"Winden St., Berlin, Germany",Sibling,No
+Maja,Schonne,S.,N/A,09012345678,maja2@gmail.com,"Winden St., Berlin, Germany",Not yet,No,,,,,Antje Traue,,"Winden St., Berlin, Germany","Parent",No
+Helge,Doppler,A.,Sr.,09123456789,helgedoppler83@hotmail.com,"Winden St., Berlin, Germany",2nd shot,No,,,,

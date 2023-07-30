@@ -19,7 +19,7 @@ class Buttons:
         elif self.__contact_form2_instance:
             self.__previous_window_entries = self.__contact_form2_instance.get_entries2()
 
-    def __previous_window(self, event):
+    def previous_window(self, event):
         self.__contact_form2_instance.second_window.destroy()  # Close the current window
         subprocess.run(["python", "contact_form.py"]) 
 

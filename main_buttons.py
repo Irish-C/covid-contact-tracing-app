@@ -28,7 +28,7 @@ class MainButtons:
         self.__search_contact_label.original_bg_color = "light blue"  # Store the original background color
         self.__search_contact_label.bind("<Enter>", self.__on_button_hover)
         self.__search_contact_label.bind("<Leave>", self.__on_button_hover)
-        self.__search_contact_label.bind("<Button-3>", self.__open_csv_reader)
+        self.__search_contact_label.bind("<Button-1>", self.__search_contacts)
 
     def __on_button_hover(self, event):
         if event.type == '7':  # Enter event
@@ -42,5 +42,6 @@ class MainButtons:
         # Open the contact form using subprocess
         subprocess.Popen(["python", "contents/contact_form.py"])
 
-    def __open_csv_reader(self):
-        open_csv = CsvReader()
+    def __search_contacts(self, event):
+        # Get the search term from the user input
+        subprocess.Popen(["python", "csv_reader.py"])
